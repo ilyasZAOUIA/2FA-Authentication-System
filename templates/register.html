@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - 2FA System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <i class="fas fa-user-plus" style="font-size: 3em; color: #4a90e2; margin-bottom: 10px;"></i>
+        <h1>Inscription</h1>
+        <p>Créez un compte sécurisé avec vérification d'unicité d'email.</p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <div class="input-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" name="email" placeholder="votre.email@example.com" required>
+            </div>
+            <div class="input-group">
+                <label for="password"><i class="fas fa-lock"></i> Mot de Passe</label>
+                <input type="password" name="password" placeholder="Choisissez un mot de passe fort" required>
+            </div>
+            <button type="submit" class="btn"><i class="fas fa-check"></i> S'Inscrire</button>
+        </form>
+        <p class="login-link">Déjà un compte ? <a href="{{ url_for('routes.login') }}"><i class="fas fa-sign-in-alt"></i> Se connecter</a></p>
+    </div>
+</body>
+</html>

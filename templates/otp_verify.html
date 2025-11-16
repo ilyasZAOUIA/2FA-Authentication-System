@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification OTP - 2FA System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <i class="fas fa-key" style="font-size: 3em; color: #4a90e2; margin-bottom: 10px;"></i>
+        <h1>Vérification OTP</h1>
+        <p>Vérifiez votre email pour le code à 6 chiffres (expire dans 5 minutes).</p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <div class="input-group">
+                <label for="otp"><i class="fas fa-mobile-alt"></i> Code OTP</label>
+                <input type="text" name="otp" placeholder="123456" maxlength="6" required>
+            </div>
+            <button type="submit" class="btn"><i class="fas fa-check-circle"></i> Vérifier</button>
+        </form>
+    </div>
+</body>
+</html>
